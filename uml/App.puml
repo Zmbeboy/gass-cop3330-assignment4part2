@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Item
+{
+string description
+localDate dueDate
+boolean completed
+descriptionUpdate(String description)
+dueDateUpdate(localDate date)
+setComplete(boolean set)
+getComplete()
+}
+
+class ToDoList
+{
+string title
+item[] items
+listTitleUpdate(String title)
+listItemAdd(Item item)
+listItemRemove(Item item)
+saveList(File file)
+}
+
+class ToDoController
+{
+private ListView ToDoLists
+private ListView ItemLists
+private TextField titleField
+private TextField descriptionField
+private Button ListAdd
+private Button ListEdit
+private Button ListRemove
+private Button ItemAdd
+private Button ItemRemove
+private Button ItemEdit
+private Button completeDisplay
+private Button incompleteDisplay
+private Button DueDateSort
+private DatePicker dueDate
+private Checkbox complete
+private MenuItem SaveSelected
+private MenuItem SaveAll
+private MenuItem LoadLists
+ToDoList[] lists
+ToDoList selectedList
+Item selectedItem
+
+getCompleteditems()
+getIncompletedItems()
+displayLists((ToDoList[] lists)
+listAdd()
+listEdit()
+listRemove()
+itemAdd()
+itemEdit()
+itemRemove()
+saveSelected()
+saveAll()
+loadList()
+}
+
+class ToDoApp
+{
+start(Stage stage)
+main()
+}
+
+ToDoList -- Item: > Stores
+ToDoApp -- ToDoController : > Uses
+ToDoController -- ToDoList : > Makes and Uses
+
+@enduml

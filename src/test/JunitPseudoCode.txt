@@ -1,0 +1,177 @@
+/*
+ *  UCF COP3330 Fall 2021 Assignment 4 Solution
+ *  Copyright 2021 Eric Gass
+ */
+
+Class ToDoController
+{
+    @test #6
+    function listAdd
+    {
+        Create a ToDoController object
+        Manually Create a ToDoList
+        Set the ToDoList to the ToDoControllers selectedList
+        call that ToDoController object's listAdd Function
+        Test to see if the ToDoController's ToDoList Array contains the manually made ToDoList
+    }
+
+    @test #7
+    function listRemove
+    {
+        Create a ToDoController object
+        Manually Create a ToDoList
+        Set the ToDoList to the ToDoControllers selectedList
+        Call that ToDoController object's listAdd Function and add the ToDoList
+        then call the ToDoController's listRemove Function
+        Test to see if the ToDoController's ToDoList Array contains no ToDoLists
+    }
+
+    @test #8
+    function listEdit
+    {
+        Create a ToDoController object
+        Manually Create a ToDoList
+        Set the ToDoList to the ToDoControllers selectedList
+        Call that ToDoController object's listAdd Function and add the ToDoList
+        Set the ToDoControllers titleField to a different string
+        Call the ToDoController listEdit function
+        Test to see if the ToDoController's ToDoList arrays do not have the original title
+    }
+
+    @test #14
+    function displayLists
+    {
+        Create a ToDoController
+        Manually Create a ToDoList
+        Fill the ToDoList with Items
+        then call the ToDoControllers displayLists function
+        Test to see if the ListView ItemLists.get is equal to the ToDoList Item Array
+    }
+
+    @test #15
+    function getIncompletedItem
+    {
+        Create a ToDoController
+        Manually Create a ToDoList
+        Fill the ToDoList with Items
+        Make some Items Incomplete and store them in a separate array
+        Then Call the ToDoControllers getIncompletedItem Function
+        Then call the ToDoControllers displayLists function
+        Test to see if the ListView ItemLists.get is equal to the ToDoList IncompleteItem Array
+    }
+
+    @test #16
+    function getCompletedItem
+    {
+        Create a ToDoController
+        Manually Create a ToDoList
+        Fill the ToDoList with Items
+        Make some Items Complete and store them in a separate array
+        Then Call the ToDoControllers getCompletedItem Function
+        Then call the ToDoControllers displayLists function
+        Test to see if the ListView ItemLists.get is equal to the ToDoList CompleteItem Array
+    }
+
+    @test #18
+    function saveAll
+    {
+        Create a ToDoController object
+        Create ToDoList objects and store them in the ToDoController's ToDoList Array
+        Create a File Object
+        loops through each ToDoListObject
+        {
+            Call the ToDoList object's saveList function with the file object
+            Test to see if the function returns 1
+        }
+
+    }
+
+    @test #19
+    function loadList
+    {
+        Create a ToDoController object
+        Call the ToDoControllers loadList function
+        Test to See if the ToDoController's Array of ToDoList is not empty
+    }
+
+    @test #20
+    function loadList
+    {
+        Create a ToDoController object
+        For multiple iterations
+        {
+            Call the ToDoControllers loadList function
+        }
+        Test to See if the ToDoController's Array of ToDoLists contains as many iterations of ToDoLists
+    }
+
+    @test #21
+    function dueDateSort
+    {
+        Create a ToDoController
+        Manually Create a ToDoList
+        Fill the ToDoList with Items
+        Give the Items Due Dates
+        Make a manually sorted List
+        Then Call the ToDoControllers dueDateSort Function
+        Test to see if the ToDoController's dueDateSort return is equal to the manually sorted list
+    }
+}
+
+Class ToDoList
+{
+    @test #9
+    function listItemAdd
+    {
+        Create a ToDoList object
+        Manually Create an Item
+        Call the ToDoList's listItemAdd function
+        Test to see if the ToDoList Item array contains the manually created item
+    }
+
+    @test #10
+    function listItemRemove
+    {
+        Create a ToDoList object
+        Manually Create an Item
+        Call the ToDoList's listItemAdd function
+        Call the ToDoList's listItemRemove function
+        Test to see if the ToDoList Item array DOES NOT contain the manually created item
+    }
+
+    @test #17
+    function saveList
+    {
+        Create a ToDoList object
+        Create a File Object
+        Call the ToDoList object's saveList function with the file object
+        Test to see if the function returns 1
+    }
+}
+
+Class Item
+{
+    @test #11
+    function descriptionUpdate
+    {
+        Create an item object
+        call the Item objects descriptionUpdate with a test string
+        test to see if the Items description is equal to the test string
+    }
+
+    @test #12
+    function dueDateUpdate
+    {
+        Create an item object
+        call the Item objects dueDateUpdate with a test localDate
+        test to see if the Items localDate is equal to the test localDate
+    }
+
+    @test #13
+    function setComplete
+    {
+        Create an item object
+        call the Item object's setComplete to true
+        Test to see if the Items Complete boolean is true
+    }
+}

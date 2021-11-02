@@ -1,0 +1,173 @@
+/*
+ *  UCF COP3330 Fall 2021 Assignment 4 Solution
+ *  Copyright 2021 Eric Gass
+ */
+
+Class Item
+{
+    Items store a string holding a description
+    Items store a localDate storing a date
+    Items store a boolean if the object is completed or not
+
+    Function descriptionUpdate(String Description)
+    {
+        This function will take in a string and replace the items description string with the new one
+        calls displayLists to display the new list in the app
+        returns nothing
+    }
+
+    Function dueDateUpdate(localDate Date)
+    {
+        This function will take in a localDate and replace the items date variable with the new one
+        calls displayLists to display the new list in the app
+        returns nothing
+    }
+
+    Function setComplete(boolean set)
+    {
+        sets the complete boolean to a user inputted value
+        returns nothing
+    }
+
+    Function getComplete()
+    {
+        returns the complete boolean of the item
+    }
+}
+
+Class ToDoList
+{
+    ToDoLists store a string with the title
+    ToDoLists store an array of items
+
+    Function listTitleUpdate(String title)
+    {
+        This function will take in a string and replaces the ToDoLists title string with the new one
+        calls displayLists to display the new list in the app
+        returns nothing
+    }
+
+    Function listItemAdd(Item item)
+    {
+        This function will take the given item, and add it into the ToDoLists Array Variable
+        returns nothing
+    }
+
+    Function listItemRemove(Item item)
+    {
+        This function will find an item in the ToDoList and if its there remove it
+        returns 1 if item is removed or 0 if no item is found
+    }
+
+    Function saveList(File file)
+    {
+        This function will take the ToDoList and save it to a specified file location
+        returns 1 if successful and 0 if not
+    }
+}
+
+Class ToDoController
+{
+    The Controller holds all of the Application objects and their relative functions
+
+    The Controller will hold an array of ToDoLists and these will be displayed and updated with the
+    display Lists Function
+
+    The Controller will also have variables telling the currently clicked ToDoList and Item
+
+    Function displayLists(ToDoList[] lists)
+    {
+        This function will push the new List Array into the ToDoLists and ItemsLists ListView Objects
+        After Most functions this will be called to make sure the App Stays up to date
+    }
+
+    Function listAdd()
+    {
+        When the ListAdd button is pressed this function will take the title from the title field
+        And create a new ToDoList object and add it to the array of ToDoLists
+    }
+
+    Function listEdit()
+    {
+        When the ListEdit button is pressed this function will take the title from the title field
+        And replace the selected lists title with the new one by calling its listTitleUpdate function
+    }
+
+    Function listRemove()
+    {
+        When the ListRemove button is pressed this function will take the selected ToDoList
+        And remove it from the Array of ToDoLists
+    }
+
+    Function itemAdd()
+    {
+        When the itemAdd button is pressed this function will take the Description from the description field
+        the complete checkbox and the dueDate and add these to a new item which gets stored in the
+        currently Selected ToDoList
+    }
+
+    Function itemEdit()
+    {
+         When the itemEdit button is pressed this function will take the Description from the description field
+         the complete checkbox and the dueDate and replace these fields in the currently selected item using
+         the descriptionUpdate, dueDateUpdate and setComplete functions
+    }
+
+    Function itemRemove()
+    {
+        When the itemRemove button is pressed this function will take the selected Item
+        And remove it from the selected ToDoLists Item array
+    }
+
+    ToDoList getCompletedItems()
+    {
+        When the completeDisplay button is pressed this function will iterate through the selected ToDoList
+        And find all items marked Complete
+        And return a ToDoList filled with these items
+    }
+
+    ToDoList getCompletedItems()
+    {
+        When the incompleteDisplay button is pressed this function will iterate through the selected ToDoList
+        And find all items marked incomplete
+        And return a ToDoList filled with these items
+    }
+
+    ToDoList dueDateSort()
+    {
+        When the DueDateSort button is pressed this function will iterate through the selected ToDoList
+        Find the Nearest DueDate and add that to a new ToDoList, remove the item from the ToDoList
+        When there is no Items left in the ToDoList
+        Return the sorted ToDoList
+    }
+
+
+    Function saveSelected
+    {
+        When the MenuItem SaveSelect is pressed, the currently selected ToDoList's saveList function will be called
+    }
+
+    Function saveAll
+    {
+        When the MenuItem SaveAll is pressed, iterate though all ToDoLists and call their saveList functions
+    }
+
+    Function loadList()
+    {
+        When the loadList function is pressed prompt the user for a file and if they want to add another file
+        store these files in an array and then load these files into the ToDoList array.
+    }
+}
+
+Class ToDoApp
+{
+    Function start(Stage stage)
+    {
+        This function loads the Application window up so it can be started with the main function
+    }
+
+    Function main()
+    {
+        Runs the launch() function to make the application open/
+    }
+}
