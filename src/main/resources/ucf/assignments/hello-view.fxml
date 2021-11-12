@@ -39,11 +39,11 @@
                   <VBox prefHeight="53.0" prefWidth="242.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" VBox.vgrow="ALWAYS" />
-                        <TextField promptText="Item Description" />
+                        <TextField fx:id="descriptionField" promptText="Item Description" />
                         <Separator prefWidth="200.0" />
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="61.0" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <DatePicker />
+                              <DatePicker fx:id="dateField" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Due Date">
                                  <HBox.margin>
                                     <Insets left="5.0" />
@@ -54,13 +54,13 @@
                         <Separator prefWidth="200.0" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Completed" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
+                              <CheckBox fx:id="completionField" mnemonicParsing="false" text="Completed" textAlignment="CENTER" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children></VBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="37.0" prefHeight="29.0" prefWidth="242.0">
                      <children>
-                        <Button fx:id="addItem" mnemonicParsing="false" text="Add Item" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addItem" mnemonicParsing="false" onAction="#addItemClick" text="Add Item" HBox.hgrow="ALWAYS" />
                         <Button mnemonicParsing="false" text="Remove Item" HBox.hgrow="ALWAYS" />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Update Item" />
                      </children>
