@@ -60,12 +60,17 @@
                      </children></VBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="37.0" prefHeight="29.0" prefWidth="242.0">
                      <children>
-                        <Button fx:id="addItem" mnemonicParsing="false" onAction="#addItemClick" text="Add Item" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addItem" alignment="CENTER" mnemonicParsing="false" onAction="#addItemClick" text="Add Item" HBox.hgrow="ALWAYS" />
                         <Button fx:id="removeItem" mnemonicParsing="false" onAction="#removeItemClick" text="Remove Item" HBox.hgrow="ALWAYS" />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Update Item" />
                      </children>
                   </HBox>
                   <Separator layoutX="10.0" layoutY="67.0" prefHeight="9.0" prefWidth="242.0" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="clearItem" alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#clearItemClick" text="Clear Items" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Displays" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>

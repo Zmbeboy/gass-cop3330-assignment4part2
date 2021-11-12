@@ -44,6 +44,9 @@ public class ToDoController {
     @FXML
     private Button removeItem;
 
+    @FXML
+    private Button clearItem;
+
     ObservableList<Item> list = FXCollections.observableArrayList(
 
          new Item("ItemTest1","2002-06-03","Complete"),
@@ -86,6 +89,12 @@ public class ToDoController {
         list.remove(item);
     }
 
+    public void clearItemClick(ActionEvent actionEvent)
+    {
+        list.clear();
+    }
+
+    //updates the fields to the selected item
     public void displaySelected(MouseEvent event)
     {
         Item item = table.getSelectionModel().getSelectedItem();
