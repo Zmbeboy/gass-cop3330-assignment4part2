@@ -24,7 +24,7 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To-Do List" />
                   <Separator prefWidth="200.0" />
-                  <TableView fx:id="table" fixedCellSize="0.0" prefWidth="500.0">
+                  <TableView fx:id="table" fixedCellSize="0.0" onMouseClicked="#displaySelected" prefWidth="500.0">
                     <columns>
                       <TableColumn fx:id="description" editable="false" prefWidth="300.0" text="Item Description" />
                       <TableColumn fx:id="date" editable="false" prefWidth="100.0" text="Due Date" />
@@ -61,7 +61,7 @@
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="37.0" prefHeight="29.0" prefWidth="242.0">
                      <children>
                         <Button fx:id="addItem" mnemonicParsing="false" onAction="#addItemClick" text="Add Item" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="Remove Item" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="removeItem" mnemonicParsing="false" onAction="#removeItemClick" text="Remove Item" HBox.hgrow="ALWAYS" />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Update Item" />
                      </children>
                   </HBox>

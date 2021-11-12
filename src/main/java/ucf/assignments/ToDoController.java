@@ -10,6 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+
+import java.time.LocalDate;
 
 
 public class ToDoController {
@@ -37,6 +40,9 @@ public class ToDoController {
 
     @FXML
     private Button addItem;
+
+    @FXML
+    private Button removeItem;
 
     ObservableList<Item> list = FXCollections.observableArrayList(
 
@@ -72,5 +78,29 @@ public class ToDoController {
             comp = "Incomplete";
         }
         list.add(new Item(desc,date,comp));
+    }
+
+    public void removeItemClick(ActionEvent actionEvent)
+    {
+        Item item = table.getSelectionModel().getSelectedItem();
+        list.remove(item);
+    }
+
+    public void displaySelected(MouseEvent event)
+    {
+        Item item = table.getSelectionModel().getSelectedItem();
+        if(item != null)
+        {
+            descriptionField.setText(item.description);
+            dateField.setValue(LocalDate.parse(item.date));
+            if(item.completion.equals("Complete"))
+            {
+                completionField.setSelected(true);
+            }
+            else
+            {
+                completionField.setSelected(false);
+            }
+        }
     }
 }
