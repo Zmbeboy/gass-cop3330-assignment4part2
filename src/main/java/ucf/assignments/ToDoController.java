@@ -50,6 +50,15 @@ public class ToDoController {
     @FXML
     private Button updateItem;
 
+    @FXML
+    private Button showIncomplete;
+
+    @FXML
+    private Button showComplete;
+
+    @FXML
+    private Button showAll;
+
     ObservableList<Item> list = FXCollections.observableArrayList(
 
          new Item("ItemTest1","2002-06-03","Complete"),
@@ -94,7 +103,9 @@ public class ToDoController {
 
     public void clearItemClick(ActionEvent actionEvent)
     {
+        table.setItems(list);
         list.clear();
+        table.refresh();
     }
 
     public void updateItemClick(ActionEvent actionEvent)
@@ -112,6 +123,40 @@ public class ToDoController {
         item.setComplete(comp);
         item.setDate(dateField.getValue().toString());
         item.setDescription(descriptionField.getText());
+        table.refresh();
+    }
+
+    public void showIncompleteClick(ActionEvent actionEvent)
+    {
+        ObservableList<Item> incompleteList = FXCollections.observableArrayList();
+        for(int i=0;i<list.size();i++)
+        {
+            if(list.get(i).getCompletion().equals("Incomplete"))
+            {
+                incompleteList.add(list.get(i));
+            }
+        }
+        table.setItems(incompleteList);
+        table.refresh();
+    }
+
+    public void showCompleteClick(ActionEvent actionEvent)
+    {
+        ObservableList<Item> completeList = FXCollections.observableArrayList();
+        for(int i=0;i<list.size();i++)
+        {
+            if(list.get(i).getCompletion().equals("Complete"))
+            {
+                completeList.add(list.get(i));
+            }
+        }
+        table.setItems(completeList);
+        table.refresh();
+    }
+
+    public void showAllClick(ActionEvent actionEvent)
+    {
+        table.setItems(list);
         table.refresh();
     }
 

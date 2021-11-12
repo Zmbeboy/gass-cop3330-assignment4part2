@@ -74,9 +74,9 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item Displays" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Show Incomplete" />
-                        <Button mnemonicParsing="false" text="Sort By Due Date" />
-                        <Button mnemonicParsing="false" text="Show Complete" />
+                        <Button fx:id="showIncomplete" mnemonicParsing="false" onAction="#showIncompleteClick" text="Show Incomplete" />
+                        <Button fx:id="showComplete" mnemonicParsing="false" onAction="#showCompleteClick" text="Show Complete" />
+                        <Button fx:id="showAll" mnemonicParsing="false" onAction="#showAllClick" text="Show All Items" />
                      </children>
                   </VBox>
                </children>
