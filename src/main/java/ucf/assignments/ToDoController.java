@@ -47,6 +47,9 @@ public class ToDoController {
     @FXML
     private Button clearItem;
 
+    @FXML
+    private Button updateItem;
+
     ObservableList<Item> list = FXCollections.observableArrayList(
 
          new Item("ItemTest1","2002-06-03","Complete"),
@@ -92,6 +95,24 @@ public class ToDoController {
     public void clearItemClick(ActionEvent actionEvent)
     {
         list.clear();
+    }
+
+    public void updateItemClick(ActionEvent actionEvent)
+    {
+        String comp;
+        if(completionField.isSelected())
+        {
+            comp = "Complete";
+        }
+        else
+        {
+            comp = "Incomplete";
+        }
+        Item item = table.getSelectionModel().getSelectedItem();
+        item.setComplete(comp);
+        item.setDate(dateField.getValue().toString());
+        item.setDescription(descriptionField.getText());
+        table.refresh();
     }
 
     //updates the fields to the selected item

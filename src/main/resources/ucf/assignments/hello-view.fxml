@@ -62,7 +62,7 @@
                      <children>
                         <Button fx:id="addItem" alignment="CENTER" mnemonicParsing="false" onAction="#addItemClick" text="Add Item" HBox.hgrow="ALWAYS" />
                         <Button fx:id="removeItem" mnemonicParsing="false" onAction="#removeItemClick" text="Remove Item" HBox.hgrow="ALWAYS" />
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Update Item" />
+                        <Button fx:id="updateItem" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#updateItemClick" text="Update Item" />
                      </children>
                   </HBox>
                   <Separator layoutX="10.0" layoutY="67.0" prefHeight="9.0" prefWidth="242.0" />
