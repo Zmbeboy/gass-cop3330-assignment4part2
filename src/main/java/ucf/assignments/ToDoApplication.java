@@ -19,7 +19,7 @@ public class ToDoApplication extends Application {
         ToDoController controller = new ToDoController();
         fxmlLoader.setController(controller);
 
-        Scene scene = new Scene(fxmlLoader.load(), 700, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 400);
         stage.setTitle("To-Do Application");
         stage.setScene(scene);
 

@@ -11,8 +11,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 
 public class ToDoController {
@@ -59,13 +66,13 @@ public class ToDoController {
     @FXML
     private Button showAll;
 
-    ObservableList<Item> list = FXCollections.observableArrayList(
+    @FXML
+    private MenuItem saveButton;
 
-         new Item("ItemTest1","2002-06-03","Complete"),
-         new Item("ItemTest2","2002-06-04","Complete"),
-         new Item("ItemTest3","2002-06-28","Incomplete"),
-         new Item("ItemTest4","2002-06-06","Complete")
-    );
+    @FXML
+    private MenuItem loadButton;
+
+    ObservableList<Item> list = FXCollections.observableArrayList();
 
 
     @FXML
@@ -81,6 +88,7 @@ public class ToDoController {
 
     public void addItemClick(ActionEvent actionEvent)
     {
+
         String comp;
         String desc = descriptionField.getText();
         String date = dateField.getValue().toString();
@@ -92,20 +100,35 @@ public class ToDoController {
         {
             comp = "Incomplete";
         }
-        list.add(new Item(desc,date,comp));
+        addItem(new Item(desc,date,comp));
+    }
+
+    public void addItem(Item item)
+    {
+        list.add(item);
     }
 
     public void removeItemClick(ActionEvent actionEvent)
     {
         Item item = table.getSelectionModel().getSelectedItem();
+        removeItem(item);
+    }
+
+    public void removeItem(Item item)
+    {
         list.remove(item);
     }
 
     public void clearItemClick(ActionEvent actionEvent)
     {
         table.setItems(list);
-        list.clear();
+        clearItem();
         table.refresh();
+    }
+
+    public void clearItem()
+    {
+        list.clear();
     }
 
     public void updateItemClick(ActionEvent actionEvent)
@@ -119,14 +142,28 @@ public class ToDoController {
         {
             comp = "Incomplete";
         }
+
         Item item = table.getSelectionModel().getSelectedItem();
-        item.setComplete(comp);
-        item.setDate(dateField.getValue().toString());
-        item.setDescription(descriptionField.getText());
+
+        updateItem(item,descriptionField.getText(),dateField.getValue().toString(),comp);
+
         table.refresh();
     }
 
+    public void updateItem(Item item, String desc, String date, String comp)
+    {
+        item.setDescription(desc);
+        item.setDate(date);
+        item.setComplete(comp);
+    }
+
     public void showIncompleteClick(ActionEvent actionEvent)
+    {
+        table.setItems(showIncomplete());
+        table.refresh();
+    }
+
+    public ObservableList<Item> showIncomplete()
     {
         ObservableList<Item> incompleteList = FXCollections.observableArrayList();
         for(int i=0;i<list.size();i++)
@@ -136,11 +173,16 @@ public class ToDoController {
                 incompleteList.add(list.get(i));
             }
         }
-        table.setItems(incompleteList);
-        table.refresh();
+        return incompleteList;
     }
 
     public void showCompleteClick(ActionEvent actionEvent)
+    {
+        table.setItems(showComplete());
+        table.refresh();
+    }
+
+    public ObservableList<Item> showComplete()
     {
         ObservableList<Item> completeList = FXCollections.observableArrayList();
         for(int i=0;i<list.size();i++)
@@ -150,14 +192,74 @@ public class ToDoController {
                 completeList.add(list.get(i));
             }
         }
-        table.setItems(completeList);
-        table.refresh();
+        return completeList;
     }
 
     public void showAllClick(ActionEvent actionEvent)
     {
+        showAll();
+    }
+
+    public void showAll()
+    {
         table.setItems(list);
         table.refresh();
+    }
+
+    public void saveButtonClick(ActionEvent actionEvent)
+    {
+        final Stage primaryStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)","*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        File file = fileChooser.showSaveDialog(primaryStage);
+        if(file != null)
+        {
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                for(int i = 0; i<list.size();i++)
+                {
+                    String result = list.get(i).getDescription()+";"+list.get(i).getDate()+";"+list.get(i).getCompletion()+"\n";
+                    fileWriter.write(result);
+                }
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void loadButtonClick(ActionEvent actionEvent)
+    {
+        final Stage primaryStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)","*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        File file = fileChooser.showOpenDialog(primaryStage);
+        if(file != null)
+        {
+            try {
+                Scanner scan = new Scanner(file);
+                while(scan.hasNextLine())
+                {
+                    String itemLine = scan.nextLine();
+                    String Desc = itemLine.substring(0, itemLine.indexOf(";"));
+                    itemLine = itemLine.substring(itemLine.indexOf(";")+1);
+                    String Date = itemLine.substring(0, itemLine.indexOf(";"));
+                    itemLine = itemLine.substring(itemLine.indexOf(";")+1);
+                    String Comp = itemLine;
+
+                    Item item = new Item(Desc,Date,Comp);
+                    list.add(item);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //updates the fields to the selected item
