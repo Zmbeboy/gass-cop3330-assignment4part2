@@ -2,6 +2,11 @@ package ucf.assignments;
 
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ControllerTest
@@ -97,9 +102,7 @@ public class ControllerTest
 
         t.addItem(item);
 
-        t.showAll();
-
-        assertEquals(false,true);
+        assertEquals(t.list.get(0),item);
     }
 
     @Test //TestCase 11
@@ -124,5 +127,26 @@ public class ControllerTest
         t.addItem(item2);
 
         assertEquals(t.showComplete().get(0),item);
+    }
+
+    @Test //TestCase 13
+    void saveList() throws IOException {
+        ToDoController t = new ToDoController();
+        Item item = new Item("hello world","2002-06-03","Complete");
+        t.addItem(item);
+        File file = new File("src/test/java/ucf/assignments/Test13.txt");
+        t.saveList(file);
+        Scanner scan = new Scanner(file);
+        assertEquals(scan.nextLine(),"hello world;2002-06-03;Complete");
+    }
+
+    @Test //TestCase 14
+    void loadList() throws IOException {
+        ToDoController t = new ToDoController();
+        File file = new File("src/test/java/ucf/assignments/Test13.txt");
+        t.loadList(file);
+        assertEquals(t.list.get(0).getDescription(),"hello world");
+        assertEquals(t.list.get(0).getDate(),"2002-06-03");
+        assertEquals(t.list.get(0).getCompletion(),"Complete");
     }
 }

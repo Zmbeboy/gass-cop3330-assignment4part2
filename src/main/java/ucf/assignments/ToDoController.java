@@ -206,8 +206,7 @@ public class ToDoController {
         table.refresh();
     }
 
-    public void saveButtonClick(ActionEvent actionEvent)
-    {
+    public void saveButtonClick(ActionEvent actionEvent) throws IOException {
         final Stage primaryStage = new Stage();
         FileChooser fileChooser = new FileChooser();
 
@@ -217,22 +216,22 @@ public class ToDoController {
         File file = fileChooser.showSaveDialog(primaryStage);
         if(file != null)
         {
-            try {
-                FileWriter fileWriter = new FileWriter(file);
-                for(int i = 0; i<list.size();i++)
-                {
-                    String result = list.get(i).getDescription()+";"+list.get(i).getDate()+";"+list.get(i).getCompletion()+"\n";
-                    fileWriter.write(result);
-                }
-                fileWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            saveList(file);
         }
     }
 
-    public void loadButtonClick(ActionEvent actionEvent)
+    public void saveList(File file) throws IOException
     {
+        FileWriter fileWriter = new FileWriter(file);
+        for(int i = 0; i<list.size();i++)
+        {
+            String result = list.get(i).getDescription()+";"+list.get(i).getDate()+";"+list.get(i).getCompletion()+"\n";
+            fileWriter.write(result);
+        }
+        fileWriter.close();
+    }
+
+    public void loadButtonClick(ActionEvent actionEvent) throws IOException {
         final Stage primaryStage = new Stage();
         FileChooser fileChooser = new FileChooser();
 
@@ -240,25 +239,22 @@ public class ToDoController {
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         File file = fileChooser.showOpenDialog(primaryStage);
-        if(file != null)
-        {
-            try {
-                Scanner scan = new Scanner(file);
-                while(scan.hasNextLine())
-                {
-                    String itemLine = scan.nextLine();
-                    String Desc = itemLine.substring(0, itemLine.indexOf(";"));
-                    itemLine = itemLine.substring(itemLine.indexOf(";")+1);
-                    String Date = itemLine.substring(0, itemLine.indexOf(";"));
-                    itemLine = itemLine.substring(itemLine.indexOf(";")+1);
-                    String Comp = itemLine;
+        loadList(file);
+    }
 
-                    Item item = new Item(Desc,Date,Comp);
-                    list.add(item);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void loadList(File file) throws IOException
+    {
+        Scanner scan = new Scanner(file);
+        while(scan.hasNextLine()) {
+            String itemLine = scan.nextLine();
+            String Desc = itemLine.substring(0, itemLine.indexOf(";"));
+            itemLine = itemLine.substring(itemLine.indexOf(";") + 1);
+            String Date = itemLine.substring(0, itemLine.indexOf(";"));
+            itemLine = itemLine.substring(itemLine.indexOf(";") + 1);
+            String Comp = itemLine;
+
+            Item item = new Item(Desc, Date, Comp);
+            list.add(item);
         }
     }
 
