@@ -50,3 +50,6 @@
   - Then click on "Load List"
   - Navigate to the file you want to load and click on the file
   - Hit the "Open" button
+
+# Bonus Sort by Due Date
+  - Clicking on the Due Date column can allow the user to sort the list by due date
