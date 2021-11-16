@@ -5,64 +5,38 @@
 
 Class Item
 {
-    Items store a string holding a description
-    Items store a localDate storing a date
-    Items store a boolean if the object is completed or not
+    String description holding a description
+    String date storing a date in the format yyyy/mm/dd
+    String completion stating "Complete" or "Incomplete" depending on the set variable
 
-    Function descriptionUpdate(String Description)
+    public Item(String description, String date, String completion)
     {
-        This function will take in a string and replace the items description string with the new one
-        calls displayLists to display the new list in the app
-        returns nothing
+        a constructor creating the item with a passed description date and completion
     }
 
-    Function dueDateUpdate(localDate Date)
+    public String getDescription()
     {
-        This function will take in a localDate and replace the items date variable with the new one
-        calls displayLists to display the new list in the app
-        returns nothing
+        returns the items description
     }
-
-    Function setComplete(boolean set)
+    public void setDescription(String description)
     {
-        sets the complete boolean to a user inputted value
-        returns nothing
+        sets the items description to the given string
     }
-
-    Function getComplete()
+    public String getDate()
     {
-        returns the complete boolean of the item
+        returns the items date
     }
-}
-
-Class ToDoList
-{
-    ToDoLists store a string with the title
-    ToDoLists store an array of items
-
-    Function listTitleUpdate(String title)
+    public void setDate(String date)
     {
-        This function will take in a string and replaces the ToDoLists title string with the new one
-        calls displayLists to display the new list in the app
-        returns nothing
+        sets the items date to the given string
     }
-
-    Function listItemAdd(Item item)
+    public String getCompletion()
     {
-        This function will take the given item, and add it into the ToDoLists Array Variable
-        returns nothing
+        returns the items completion status
     }
-
-    Function listItemRemove(Item item)
+    public void setComplete(String completion)
     {
-        This function will find an item in the ToDoList and if its there remove it
-        returns 1 if item is removed or 0 if no item is found
-    }
-
-    Function saveList(File file)
-    {
-        This function will take the ToDoList and save it to a specified file location
-        returns 1 if successful and 0 if not
+        sets the items completion status to the given string
     }
 }
 
@@ -70,94 +44,152 @@ Class ToDoController
 {
     The Controller holds all of the Application objects and their relative functions
 
-    The Controller will hold an array of ToDoLists and these will be displayed and updated with the
-    display Lists Function
+    The Controller will hold an array of items and these will be displayed in the table JFX element
 
-    The Controller will also have variables telling the currently clicked ToDoList and Item
+    TableView<Item> table a javaFX element of the table that displays items
+    TableColumn<Item,String> description a javaFX element of a column of a table
+    TableColumn<Item, String> date a javaFX element of a column of a table
+    TableColumn<Item,String> completion a javaFX element of a column of a table
+    TextField descriptionField a javaFX element of a field that text is inputted into
+    DatePicker dateField a javaFX element of a field that the date is inputted into
+    CheckBox completionField a javaFX element of a checkbox that signifies if the object is completed or not
+    Button addItem a javaFX element of a button
+    Button removeItem a javaFX element of a button
+    Button clearItem a javaFX element of a button
+    Button updateItem a javaFX element of a button
+    Button showIncomplete a javaFX element of a button
+    Button showComplete a javaFX element of a button
+    Button showAll a javaFX element of a button
+    MenuItem saveButton a javaFX element of a button
+    MenuItem loadButton a javaFX element of a button
+    ObservableList<Item> list an observable list that gets passed into the table element containing all of the Item objects
 
-    Function displayLists(ToDoList[] lists)
+
+    protected void initialize()
     {
-        This function will push the new List Array into the ToDoLists and ItemsLists ListView Objects
-        After Most functions this will be called to make sure the App Stays up to date
+        Set the column elements to use the correct information from the item objects
+        then set the table to show the list
     }
 
-    Function listAdd()
+    public void addItemClick(ActionEvent actionEvent)
     {
-        When the ListAdd button is pressed this function will take the title from the title field
-        And create a new ToDoList object and add it to the array of ToDoLists
+        Takes the values from the different javaFX fields stores them in an item and sends them to addItem()
     }
 
-    Function listEdit()
+    public void addItem(Item item)
     {
-        When the ListEdit button is pressed this function will take the title from the title field
-        And replace the selected lists title with the new one by calling its listTitleUpdate function
+        adds the item to the observablelist of all items.
     }
 
-    Function listRemove()
+    public void removeItemClick(ActionEvent actionEvent)
     {
-        When the ListRemove button is pressed this function will take the selected ToDoList
-        And remove it from the Array of ToDoLists
+        gets the selected item in the table and passes it to the removeItem() function
     }
 
-    Function itemAdd()
+    public void removeItem(Item item)
     {
-        When the itemAdd button is pressed this function will take the Description from the description field
-        the complete checkbox and the dueDate and add these to a new item which gets stored in the
-        currently Selected ToDoList
+        removes the given item in the oberveablelist
     }
 
-    Function itemEdit()
+    public void clearItemClick(ActionEvent actionEvent)
     {
-         When the itemEdit button is pressed this function will take the Description from the description field
-         the complete checkbox and the dueDate and replace these fields in the currently selected item using
-         the descriptionUpdate, dueDateUpdate and setComplete functions
+        calls the clearItem() function
+        then refreshes the table, so the user can see the cleared observablelist
     }
 
-    Function itemRemove()
+    public void clearItem()
     {
-        When the itemRemove button is pressed this function will take the selected Item
-        And remove it from the selected ToDoLists Item array
+        clears the observablelist
     }
 
-    ToDoList getCompletedItems()
+    public void updateItemClick(ActionEvent actionEvent)
     {
-        When the completeDisplay button is pressed this function will iterate through the selected ToDoList
-        And find all items marked Complete
-        And return a ToDoList filled with these items
+        gets the selected item, description, date, and completion status, from the JFX elements
+        and passes them to updateItem()
     }
 
-    ToDoList getCompletedItems()
+    public void updateItem(Item item, String desc, String date, String comp)
     {
-        When the incompleteDisplay button is pressed this function will iterate through the selected ToDoList
-        And find all items marked incomplete
-        And return a ToDoList filled with these items
+        sets the selected items variables to the given variables
     }
 
-    ToDoList dueDateSort()
+    public void showIncompleteClick(ActionEvent actionEvent)
     {
-        When the DueDateSort button is pressed this function will iterate through the selected ToDoList
-        Find the Nearest DueDate and add that to a new ToDoList, remove the item from the ToDoList
-        When there is no Items left in the ToDoList
-        Return the sorted ToDoList
+        sets the table to show the results of the showIncomplete() function
     }
 
-
-    Function saveSelected
+    public ObservableList<Item> showIncomplete()
     {
-        When the MenuItem SaveSelect is pressed, the currently selected ToDoList's saveList function will be called
+        creates a new empty observable list
+        then loop through the main observable list and add any item with "Incomplete" to the new observable list
+        and return the filled list
     }
 
-    Function saveAll
+    public void showCompleteClick(ActionEvent actionEvent)
     {
-        When the MenuItem SaveAll is pressed, iterate though all ToDoLists and call their saveList functions
+        sets the table to show the results of the showComplete() function
     }
 
-    Function loadList()
+    public ObservableList<Item> showComplete()
     {
-        When the loadList function is pressed prompt the user for a file and if they want to add another file
-        store these files in an array and then load these files into the ToDoList array.
+        creates a new empty observable list
+        then loop through the main observable list and add any item with "Complete" to the new observable list
+        and return the filled list
     }
-}
+
+    public void showAllClick(ActionEvent actionEvent)
+    {
+        runs the showAll function when the showAll button is pressed
+    }
+
+    public void showAll()
+    {
+        sets the table to display the main list, rather than the complete or incomplete lists
+        and then refreshes the table so the list actually displays
+    }
+
+    public void saveButtonClick(ActionEvent actionEvent) throws IOException
+    {
+        Once the Save button is pressed, open up the file chooser menu
+        and give the filechooser the .txt extension so the saved file will be in that format
+        then when the user names and selects the file, pass the file to the saveList function.
+    }
+
+    public void saveList(File file) throws IOException
+    {
+        Use a fileWrite to take the information from each item in a list
+        and write it to the given file.
+        loop through each item and paste their description, date, and status separated by a ;
+    }
+
+    public void loadButtonClick(ActionEvent actionEvent) throws IOException {
+        Once the load button is pressed, open up the file chooser menu
+        and give the filechooser the .txt extension so the loaded file will be of that format
+        then when the user selects the file, pass the file to the loadList function.
+    }
+
+    public void loadList(File file) throws IOException
+    {
+        Create a scanner that can only read from the given file
+        loop through each line of the file
+        {
+            read until the first ; is hit and add that string to the description field of an item
+            read until the second ; is hit and add that string to the date field of an item
+            read the remaning string into the status field of an item
+            make an item with these variables and add it to the observablelist
+        }
+    }
+
+    public void displaySelected(MouseEvent event)
+    {
+        find the selected item in the table
+        if that item exists within the observable list
+        set the description field JFX element to have that items description
+        set the date DatePicker JFX element to have that items date
+        set the completion checkbox to the items completion status
+
+        this function makes it easier to update an Item, as the variables of the item will already be in the fields to edit
+    }
 
 Class ToDoApp
 {

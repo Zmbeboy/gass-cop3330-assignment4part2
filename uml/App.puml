@@ -3,71 +3,67 @@
 
 class Item
 {
-string description
-localDate dueDate
-boolean completed
-descriptionUpdate(String description)
-dueDateUpdate(localDate date)
-setComplete(boolean set)
-getComplete()
-}
-
-class ToDoList
-{
-string title
-item[] items
-listTitleUpdate(String title)
-listItemAdd(Item item)
-listItemRemove(Item item)
-saveList(File file)
+    String description
+    String date
+    String completion
+    public Item(String description, String date, String completion)
+    public String getDescription()
+    public void setDescription(String description)
+    public String getDate()
+    public void setDate(String date)
+    public String getCompletion()
+    public void setComplete(String completion)
 }
 
 class ToDoController
 {
-private ListView ToDoLists
-private ListView ItemLists
-private TextField titleField
-private TextField descriptionField
-private Button ListAdd
-private Button ListEdit
-private Button ListRemove
-private Button ItemAdd
-private Button ItemRemove
-private Button ItemEdit
-private Button completeDisplay
-private Button incompleteDisplay
-private Button DueDateSort
-private DatePicker dueDate
-private Checkbox complete
-private MenuItem SaveSelected
-private MenuItem SaveAll
-private MenuItem LoadLists
-ToDoList[] lists
-ToDoList selectedList
-Item selectedItem
-
-getCompleteditems()
-getIncompletedItems()
-displayLists((ToDoList[] lists)
-listAdd()
-listEdit()
-listRemove()
-itemAdd()
-itemEdit()
-itemRemove()
-saveSelected()
-saveAll()
-loadList()
+    private TableView<Item> table;
+    private TableColumn<Item,String> description;
+    private TableColumn<Item, String> date;
+    private TableColumn<Item,String> completion;
+    private TextField descriptionField;
+    private DatePicker dateField;
+    private CheckBox completionField;
+    private Button addItem;
+    private Button removeItem;
+    private Button clearItem;
+    private Button updateItem;
+    private Button showIncomplete;
+    private Button showComplete;
+    private Button showAll;
+    private MenuItem saveButton;
+    private MenuItem loadButton;
+    ObservableList<Item> list
+    protected void initialize()
+    public void addItemClick(ActionEvent actionEvent)
+    public void addItem(Item item)
+    public void removeItemClick(ActionEvent actionEvent)
+    public void removeItem(Item item)
+    public void clearItemClick(ActionEvent actionEvent)
+    public void clearItem()
+    public void updateItemClick(ActionEvent actionEvent)
+    public void updateItem(Item item, String desc, String date, String comp)
+    public void showIncompleteClick(ActionEvent actionEvent)
+    public ObservableList<Item> showIncomplete()
+    public void showCompleteClick(ActionEvent actionEvent)
+    public ObservableList<Item> showComplete()
+    public void showAllClick(ActionEvent actionEvent)
+    public void showAll()
+    public void saveButtonClick(ActionEvent actionEvent)
+    public void saveList(File file)
+    public void loadButtonClick(ActionEvent actionEvent)
+    public void loadList(File file) throws IOException
+    public void displaySelected(MouseEvent event)
 }
 
 class ToDoApp
 {
-start(Stage stage)
-main()
+    start(Stage stage)
+    main()
 }
 
-ToDoList -- Item: > Stores
+
 ToDoApp -- ToDoController : > Uses
-ToDoController -- ToDoList : > Makes and Uses
+ToDoController -- Item : > Makes and Uses
 
 @enduml

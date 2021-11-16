@@ -78,7 +78,6 @@ public class ToDoController {
     @FXML
     protected void initialize()
     {
-        //list.add();
         description.setCellValueFactory(new PropertyValueFactory<Item,String>("description"));
         date.setCellValueFactory(new PropertyValueFactory<Item,String>("date"));
         completion.setCellValueFactory(new PropertyValueFactory<Item,String>("completion"));

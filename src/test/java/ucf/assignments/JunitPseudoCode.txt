@@ -3,175 +3,123 @@
  *  Copyright 2021 Eric Gass
  */
 
-Class ToDoController
+
+public class ControllerTest
 {
-    @test #6
-    function listAdd
+    TestCase 01
+    void isList()
     {
         Create a ToDoController object
-        Manually Create a ToDoList
-        Set the ToDoList to the ToDoControllers selectedList
-        call that ToDoController object's listAdd Function
-        Test to see if the ToDoController's ToDoList Array contains the manually made ToDoList
+        manually create an item
+        create 101 of that item and add them to the list
+        check to see if the list had 101 items in it
     }
 
-    @test #7
-    function listRemove
+    TestCase 02
+    void itemDescription()
+    {
+        manually create an item using its constructor
+        check to see if the description field of the item equals a string of the desired description
+    }
+
+    TestCase 03
+    void dateDescription()
+    {
+        manually create an item using its constructor
+        check to see if the date field of the item equals a string of the desired date
+    }
+
+    TestCase 04
+    void addItem()
     {
         Create a ToDoController object
-        Manually Create a ToDoList
-        Set the ToDoList to the ToDoControllers selectedList
-        Call that ToDoController object's listAdd Function and add the ToDoList
-        then call the ToDoController's listRemove Function
-        Test to see if the ToDoController's ToDoList Array contains no ToDoLists
+        manually create an item
+        call the todocontrollers addItem() function with the item
+        check to see if the item is now stored within the todocontrollers list variable
     }
 
-    @test #8
-    function listEdit
+    TestCase 05
+    void removeItem()
     {
         Create a ToDoController object
-        Manually Create a ToDoList
-        Set the ToDoList to the ToDoControllers selectedList
-        Call that ToDoController object's listAdd Function and add the ToDoList
-        Set the ToDoControllers titleField to a different string
-        Call the ToDoController listEdit function
-        Test to see if the ToDoController's ToDoList arrays do not have the original title
+        manually create an item
+        Add the item to the todocontroller list with the addItem() function
+        remove the item from the ToDoController list with the removeItem() funtion
+        check to see if the item is not in the list
     }
 
-    @test #14
-    function displayLists
-    {
-        Create a ToDoController
-        Manually Create a ToDoList
-        Fill the ToDoList with Items
-        then call the ToDoControllers displayLists function
-        Test to see if the ListView ItemLists.get is equal to the ToDoList Item Array
-    }
-
-    @test #15
-    function getIncompletedItem
-    {
-        Create a ToDoController
-        Manually Create a ToDoList
-        Fill the ToDoList with Items
-        Make some Items Incomplete and store them in a separate array
-        Then Call the ToDoControllers getIncompletedItem Function
-        Then call the ToDoControllers displayLists function
-        Test to see if the ListView ItemLists.get is equal to the ToDoList IncompleteItem Array
-    }
-
-    @test #16
-    function getCompletedItem
-    {
-        Create a ToDoController
-        Manually Create a ToDoList
-        Fill the ToDoList with Items
-        Make some Items Complete and store them in a separate array
-        Then Call the ToDoControllers getCompletedItem Function
-        Then call the ToDoControllers displayLists function
-        Test to see if the ListView ItemLists.get is equal to the ToDoList CompleteItem Array
-    }
-
-    @test #18
-    function saveAll
+    TestCase 06
+    void clearList()
     {
         Create a ToDoController object
-        Create ToDoList objects and store them in the ToDoController's ToDoList Array
-        Create a File Object
-        loops through each ToDoListObject
-        {
-            Call the ToDoList object's saveList function with the file object
-            Test to see if the function returns 1
-        }
+        manually create an item
 
+        add 101 items to the ToDoControllers list
+        clear the 101 items from the list with the clearList() function
+        check to see if the list is empty
     }
 
-    @test #19
-    function loadList
+    TestCase 07,08,09
+    void updateItem()
     {
         Create a ToDoController object
-        Call the ToDoControllers loadList function
-        Test to See if the ToDoController's Array of ToDoList is not empty
+        manually create an item
+        Add the item to a list
+
+        check to see if the date description and status are set on the item
+        call the ToDoControllers updateItem() function and pass it new variables and the item
+        check to see if the date description and status of the new item reflect the new updated values
     }
 
-    @test #20
-    function loadList
+    TestCase 10
+    void showAll()
     {
         Create a ToDoController object
-        For multiple iterations
-        {
-            Call the ToDoControllers loadList function
-        }
-        Test to See if the ToDoController's Array of ToDoLists contains as many iterations of ToDoLists
+        manually create an item
+        Add the item to a list
+
+        Check to see if the item is in the main ToDoControllers list
     }
 
-    @test #21
-    function dueDateSort
+    TestCase 11
+    void showIncomplete()
     {
-        Create a ToDoController
-        Manually Create a ToDoList
-        Fill the ToDoList with Items
-        Give the Items Due Dates
-        Make a manually sorted List
-        Then Call the ToDoControllers dueDateSort Function
-        Test to see if the ToDoController's dueDateSort return is equal to the manually sorted list
-    }
-}
+        Create a ToDoController object
+        manually create two items one marked complete and one marked incomplete
+        Add the items to a list
 
-Class ToDoList
-{
-    @test #9
-    function listItemAdd
-    {
-        Create a ToDoList object
-        Manually Create an Item
-        Call the ToDoList's listItemAdd function
-        Test to see if the ToDoList Item array contains the manually created item
+        check to see if the item in the ToDoControllers showIncomplete() list is equal to the incomplete manually made object
     }
 
-    @test #10
-    function listItemRemove
+    TestCase 12
+    void showComplete()
     {
-        Create a ToDoList object
-        Manually Create an Item
-        Call the ToDoList's listItemAdd function
-        Call the ToDoList's listItemRemove function
-        Test to see if the ToDoList Item array DOES NOT contain the manually created item
+        Create a ToDoController object
+        manually create two items one marked complete and one marked incomplete
+        Add the items to a list
+
+        check to see if the item in the ToDoControllers showComplete() list is equal to the complete manually made object
     }
 
-    @test #17
-    function saveList
+    TestCase 13
+    void saveList() throws IOException
     {
-        Create a ToDoList object
-        Create a File Object
-        Call the ToDoList object's saveList function with the file object
-        Test to see if the function returns 1
-    }
-}
+        Create a ToDoController object
+        manually create an item
+        Add the item to a list
 
-Class Item
-{
-    @test #11
-    function descriptionUpdate
-    {
-        Create an item object
-        call the Item objects descriptionUpdate with a test string
-        test to see if the Items description is equal to the test string
+        Create a file and give it a specified path
+        Call the ToDoControllers saveList() function with the given file
+        Create a Scanner to read in from the File
+        Check to see if the first line of the file matches the items description, date, and completion status
     }
 
-    @test #12
-    function dueDateUpdate
+    TestCase 14
+    void loadList() throws IOException
     {
-        Create an item object
-        call the Item objects dueDateUpdate with a test localDate
-        test to see if the Items localDate is equal to the test localDate
-    }
-
-    @test #13
-    function setComplete
-    {
-        Create an item object
-        call the Item object's setComplete to true
-        Test to see if the Items Complete boolean is true
+        Create a ToDoController object
+        Create a file and give it a specified path using the path from testcase 13
+        Call the ToDoControllers loadList() function with the file.
+        Check to see if the ToDoControllers list now contains an item with the specified description date and completion status
     }
 }
